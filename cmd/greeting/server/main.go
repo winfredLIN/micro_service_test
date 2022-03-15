@@ -9,24 +9,27 @@ import (
 	"os/signal"
 	"syscall"
 
+	cfg "micro-service-test/config"
+
 	"google.golang.org/grpc"
 )
+
 //应该创建一个配置文件服务于所有的文件的配置
 type Config struct {
 	Host string
 	Port string
 }
 
-var config = Config{
-	Host: "127.0.0.1",
-	Port: ":50051",
+var config = greeting.Config{
+	Host: cfg.GetConfig().Server.Host,
+	Port: ":" + cfg.GetConfig().Server.Port,
 }
 
 func main() {
 
 	// 建立服务并且注册
 	greetingServiceServer := greeting.NewServer()
-	greetingRegistrationServer :=greeting.NewRegistrationServer()
+	greetingRegistrationServer := greeting.NewRegistrationServer()
 
 	grpcServer := grpc.NewServer()
 	// 注册需要注册gRPC的服务以及在protoc定义的服务

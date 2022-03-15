@@ -5,13 +5,25 @@ import (
 	"fmt"
 	"log"
 	pb "micro-service-test/api/protobuf/greeting"
+
+	cfg "micro-service-test/config"
 	"micro-service-test/services/greeting"
 )
 
 //应该创建一个配置文件服务于所有的文件的配置
+// var config = greeting.Config{
+// 	Host: cfg.GetConfig().Client.Host,
+// 	Port: cfg.GetConfig().Client.Port,
+// }
+
+type Config struct {
+	Host string
+	Port string
+}
+
 var config = greeting.Config{
-	Host: "192.168.1.104",
-	Port: ":50051",
+	Host: cfg.GetConfig().Client.Host,
+	Port: ":"+cfg.GetConfig().Client.Port,
 }
 
 func main() {
@@ -29,16 +41,17 @@ func main() {
 
 	fmt.Println(res.Message)
 
-	client1,err := greeting.NewRegistrationClient(config)
+	client1, err := greeting.NewRegistrationClient(config)
 	if err != nil {
 		log.Fatalln(err)
 	}
 	res1, err := client1.Register(context.Background(), &pb.InformationRequest{Request: true})
-	
+
 	if err != nil {
 		log.Fatalln(err)
 	}
-	fmt.Print("answer is",res1.Answer)
+	fmt.Print("answer is", res1.Answer)
 
 }
+
 //ctrl+shift reload 可以重启vscode
