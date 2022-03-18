@@ -1,19 +1,3 @@
-# 目录结构
-# api
-## protobuf
-### greeting
-
-# cmd
-## greeting
-### client
-### server
-
-# lib
-## dbcontext
-
-# services
-## greeting
-
 # 梳理
 1、api 里面只方法的定义 也就是proto的文件
 	1.1任务1：扩展了两个方法并实现
@@ -52,48 +36,3 @@
 13、未来的规划
 	github已经将rest api ->迁移至 graphql
 	json -> github最新的api已经完全迁移到graphql了
-# 任务
-任务1：扩展了两个方法并实现🆗
-任务2：使用GROM设计并实现一个用户表需要用到①增删改查②把数据据库migration🆗
-任务3：配置vscode 下载字体firacode🆗
-
-///////////////////////////////////////////////////////以下已经整理完了
-https://grpc.io/docs/languages/go/quickstart/
-
-数据库用GORM
-
-配置文件  用Viper
-
-开发环境优化
-
-扩展两个
-
-extil 让业务和工具解耦 pull request
-
-做一个User微服务   Gorm  设计一个用户表   增删改查   把数据据库migration
-
-用户 User 表： 考虑什么信息是最需要的
-
-User（grpc）  user-web（gin）gin 最广泛 web框架  user-graphql
-
-rest api -> graphql
-
-json -> github最新的api已经完全迁移到graphql了
-
-postman  postwomen
-
-注册/登录     auth鉴权  jwt
-
-用户信息修改
-
-商品服务
-
-订单服务
-
-用户购买商品
-
-用户查询商品状态
-
-退款
-
-80%
