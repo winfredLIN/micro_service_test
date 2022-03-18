@@ -1,0 +1,10 @@
+go 1.18
+
+use (
+	./api/protobuf/greeting
+	./cmd/greeting/client
+	./cmd/greeting/server
+	./config
+	./lib/dbcontext
+	./services/greeting
+)

@@ -2,14 +2,14 @@ package main
 
 import (
 	"log"
-	pb "micro-service-test/api/protobuf/greeting"
-	"micro-service-test/services/greeting"
+	pb "api/protobuf/greeting"
+	"services/greeting"
 	"net"
 	"os"
 	"os/signal"
 	"syscall"
 
-	cfg "micro-service-test/config"
+	cfg "config"
 
 	"google.golang.org/grpc"
 )

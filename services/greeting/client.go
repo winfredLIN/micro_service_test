@@ -3,7 +3,7 @@ package greeting
 import (
 	"context"
 	"fmt"
-	pb "micro-service-test/api/protobuf/greeting"
+	pb "api/protobuf/greeting"
 	"time"
 
 	"google.golang.org/grpc"

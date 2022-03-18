@@ -18,7 +18,7 @@ type Users_Info struct {
 }
 
 func Create_Account(name string, password string) (err error) {
-	db, err := gorm.Open("sqlite3", "User_Account.db")
+	db, err := gorm.Open("sqlite3", "lib/lib_files/User_Account.db")
 	if err != nil {
 		panic("failed to connect database")
 	}

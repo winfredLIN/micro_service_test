@@ -3,9 +3,9 @@ package greeting
 import (
 	"context"
 	"fmt"
-	pb "micro-service-test/api/protobuf/greeting"
+	pb "api/protobuf/greeting"
 
-	"micro-service-test/lib/dbcontext"
+	"lib/dbcontext"
 )
 
 type Server struct {

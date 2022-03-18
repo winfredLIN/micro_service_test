@@ -1,13 +1,12 @@
 package main
 
 import (
+	pb "api/protobuf/greeting"
 	"context"
 	"fmt"
 	"log"
-	pb "micro-service-test/api/protobuf/greeting"
-
-	cfg "micro-service-test/config"
-	"micro-service-test/services/greeting"
+	cfg "config"
+	"services/greeting"
 )
 
 //应该创建一个配置文件服务于所有的文件的配置
@@ -23,7 +22,7 @@ type Config struct {
 
 var config = greeting.Config{
 	Host: cfg.GetConfig().Client.Host,
-	Port: ":"+cfg.GetConfig().Client.Port,
+	Port: ":" + cfg.GetConfig().Client.Port,
 }
 
 func main() {
