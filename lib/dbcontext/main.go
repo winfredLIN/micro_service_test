@@ -32,20 +32,31 @@ func Create_Account(name string, password string) (err error) {
 
 func Retrieve_Account(id uint16) (result Users_Info, err error) {
 	var user Users_Info
-	db, err := gorm.Open("sqlite3", "User_Account.db")
+	db, err := gorm.Open("sqlite3", "lib/lib_files/User_Account.db")
 	if err != nil {
 		panic("failed to retrieve")
 	}
 	defer db.Close()
 
 	db.First(&user, "Id = ?", id) //查询某个对象
-	println(user.Name)
 	return user, nil
+}
+
+// 查询表中是否有同样的昵称，如果有，则返回false
+func Retrieve_UserName(name string) (result Users_Info) {
+	var user Users_Info
+	db, err := gorm.Open("sqlite3", "lib/lib_files/User_Account.db")
+	if err != nil {
+		panic("failed to retrieve")
+	}
+	defer db.Close()
+	db.Where("name = ?", name).First(&user)
+	return user
 }
 
 func Update_Account(id uint16, name string) (result Users_Info, err error) {
 	var user Users_Info
-	db, err := gorm.Open("sqlite3", "User_Account.db")
+	db, err := gorm.Open("sqlite3", "lib/lib_files/User_Account.db")
 	if err != nil {
 		panic("failed to retrieve")
 	}
@@ -57,7 +68,7 @@ func Update_Account(id uint16, name string) (result Users_Info, err error) {
 
 func Delete_Account(id uint16) (err error) {
 	var user Users_Info
-	db, err := gorm.Open("sqlite3", "User_Account.db")
+	db, err := gorm.Open("sqlite3", "lib/lib_files/User_Account.db")
 	if err != nil {
 		panic("failed to delete")
 	}

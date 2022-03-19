@@ -32,8 +32,21 @@ func (s *Server) Register(ctx context.Context,req *pb.InformationRequest)(*pb.An
 	var username string
 	var userpassword1 string
 	var userpassword2 string
-	fmt.Printf("创建账号 \n 请输入用户名：")
-	fmt.Scan(&username)
+
+	for{
+		fmt.Printf("创建账号 \n 请输入用户名：")
+		fmt.Scan(&username)
+		name := dbcontext.Retrieve_UserName(username).Name
+		fmt.Printf("创建的名字 %s ，查询的名字 %s", username,name)
+		if  name == username {
+			fmt.Println("用户名重复，请重新输入")
+		}else{
+			fmt.Println("用户名可用")
+			break
+		}
+		
+	}
+	
 
 	for {
 		fmt.Printf("\n 请输入密码：")
@@ -47,6 +60,6 @@ func (s *Server) Register(ctx context.Context,req *pb.InformationRequest)(*pb.An
 		}else{fmt.Print("两次输入的密码不一致,请重新输入")}
 	}
 	return &pb.AnswerResponse{
-		Answer: "哈哈",
+		Answer: "这是账号注册模块",
 	},nil
 }
