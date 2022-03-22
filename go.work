@@ -1,6 +1,7 @@
 go 1.18
 
 use (
+	./LaunchService/client
 	./api/protobuf/greeting
 	./cmd/greeting/client
 	./cmd/greeting/server
