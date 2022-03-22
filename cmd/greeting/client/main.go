@@ -2,37 +2,17 @@ package main
 
 import (
 	pb "api/protobuf/greeting"
-	cfg "config"
 	"context"
 	"fmt"
 	"log"
 	"services/greeting"
+	"services/login"
 )
 
-type Config struct {
-	Host string
-	Port string
-}
-
-var config = greeting.Config{
-	Host: cfg.GetConfig().Client.Host,
-	Port: ":" + cfg.GetConfig().Client.Port,
-}
-
 func main() {
-	//客户端：登陆
-	loginClient, err := greeting.NewLoginClient(config)
-	if err != nil {
-		log.Fatalln(err)
-	}
-	loginResponse, err := loginClient.Login(context.Background(), &pb.LoginRequest{LoginCall: true})
-	if err != nil {
-		log.Fatalln(err)
-	}
-	fmt.Print("answer is", loginResponse.LoginAnswer)
 
 	// 客户端：注册
-	client1, err := greeting.NewRegistrationClient(config)
+	client1, err := greeting.NewRegistrationClient()
 	if err != nil {
 		log.Fatalln(err)
 	}
@@ -43,8 +23,19 @@ func main() {
 		log.Fatalln(err)
 	}
 	fmt.Print("answer is", res1.RegisterAnswer)
+	//客户端：登陆
+	loginClient, err := login.NewLoginClient()
+	if err != nil {
+		log.Fatalln(err)
+	}
+	loginResponse, err := loginClient.Login(context.Background(), &pb.LoginRequest{LoginCall: true})
+	if err != nil {
+		log.Fatalln(err)
+	}
+	fmt.Print("answer is", loginResponse.LoginAnswer)
+
 	//客户端：问候
-	client, err := greeting.NewClient(config)
+	client, err := greeting.NewClient()
 	if err != nil {
 		log.Fatalln(err)
 	}
@@ -57,5 +48,3 @@ func main() {
 	fmt.Println(res.SayHelloAnswer)
 
 }
-
-//ctrl+shift reload 可以重启vscode

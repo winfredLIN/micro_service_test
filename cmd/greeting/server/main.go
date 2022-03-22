@@ -4,6 +4,7 @@ import (
 	"log"
 	pb "api/protobuf/greeting"
 	"services/greeting"
+	"services/login"
 	"net"
 	"os"
 	"os/signal"
@@ -30,7 +31,7 @@ func main() {
 	// 建立服务并且注册
 	greetingServiceServer := greeting.NewServer()
 	greetingRegistrationServer := greeting.NewRegistrationServer()
-	LoginServiceServer := greeting.NewLoginServer()
+	LoginServiceServer := login.NewLoginServer()
 
 	grpcServer := grpc.NewServer()
 	// 注册需要注册gRPC的服务以及在protoc定义的服务

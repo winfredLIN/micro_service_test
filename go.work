@@ -6,5 +6,7 @@ use (
 	./cmd/greeting/server
 	./config
 	./lib/dbcontext
+	./lib/lib_test
 	./services/greeting
+	./services/login
 )
