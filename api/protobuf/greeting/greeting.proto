@@ -2,33 +2,45 @@ syntax = "proto3";
 //使用proctoc生成gRPC的api
 
 option go_package = "api/protobuf/greeting";
-
-package api.protobuf.greeting;
 // for other languages (java
-// 定义服务
+package api.protobuf.greeting;
+
+// 定义问候服务
 service GreetingService{
     rpc SayHello(SayHelloRequest) returns(SayHelloResponse);
 }
 
 //定义服务接受和返回的内容
 message SayHelloRequest{
-    string name = 1;
+    string SayHelloName = 1;
 }
 
 message SayHelloResponse{
-    string message = 1;
+    string SayHelloAnswer = 1;
 }
 
-//定义服务2
+//定义注册服务
 service RegistrationService {
-    rpc Register(InformationRequest) returns(AnswerResponse);
+    rpc Register(RegisterRequest) returns(RegisterResponse);
 }
 
-message InformationRequest {
-    bool request = 1;
+message RegisterRequest {
+    bool RegisterCall = 1;
 }
 
-message AnswerResponse {
-    string answer = 1;
+message RegisterResponse {
+    string RegisterAnswer = 1;
+}
+//定义登陆服务
+service LoginService {
+    rpc Login(LoginRequest) returns(LoginResponse);
+}
+
+message LoginRequest {
+    bool LoginCall = 1;
+}
+
+message LoginResponse {
+    string LoginAnswer = 1;
 }
 
