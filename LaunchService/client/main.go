@@ -9,28 +9,31 @@ import (
 	"services/login"
 )
 
-func LaunchLoginClient() bool {
-	//客户端：登陆
+// 开放用户名密码的接口给gin
+func LaunchLoginClient(username string, password string) (answer string) {
 	loginClient, err := login.NewLoginClient()
 	if err != nil {
 		log.Fatalln(err)
 	}
-	loginResponse, err := loginClient.Login(context.Background(), &pb.LoginRequest{LoginCall: true})
+	loginResponse, err := loginClient.Login(context.Background(), &pb.LoginRequest{LoginCall: true, Username: username, Password: password})
 	if err != nil {
 		log.Fatalln(err)
 	}
-	fmt.Print("answer is", loginResponse.LoginAnswer)
-	return true
+
+	return loginResponse.LoginAnswer
 }
 
-func LaunchGreetingClient() bool {
+// 应该加一个传入gin 给的参数的入口
+func LaunchGreetingClient(name string) bool {
 	//客户端：问候
+	name1 := name
 	client, err := greeting.NewClient()
 	if err != nil {
 		log.Fatalln(err)
 	}
+
 	//发送SayHelloRequest，包括内容Name
-	res, err := client.SayHello(context.Background(), &pb.SayHelloRequest{SayHelloName: "vincent"})
+	res, err := client.SayHello(context.Background(), &pb.SayHelloRequest{SayHelloName: name1})
 	if err != nil {
 		log.Fatalln(err)
 	}

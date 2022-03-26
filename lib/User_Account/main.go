@@ -1,4 +1,4 @@
-package dbcontext
+package User_Account
 
 import (
 	//"time"
@@ -12,29 +12,27 @@ type Users_Info struct {
 	//Id uint16 `gorm:"primaryKey"`
 	gorm.Model
 
-	Name            string
-	Account_Balance float32 //账户余额，
-	Premium         bool    // 会员
-	Password        string  //
+	Name     string
+	Password string //
 }
 
 // 如果没有表要先创建一个表
 func Create_Account(name string, password string) (err error) {
-	db, err := gorm.Open("sqlite3", "lib/lib_file/User_Account.db")
+	db, err := gorm.Open("sqlite3", "lib/lib_files/User_Account.db")
 	if err != nil {
 		panic("failed to connect database")
 	}
 	defer db.Close()
 
 	db.AutoMigrate(Users_Info{})
-	user := Users_Info{Name: name, Password: password, Account_Balance: 0, Premium: false}
+	user := Users_Info{Name: name, Password: password}
 	db.Create(&user)
 	return nil
 }
 
 func Retrieve_Account(id uint16) (result Users_Info, err error) {
 	var User Users_Info
-	db, err := gorm.Open("sqlite3", "lib/lib_file/User_Account.db")
+	db, err := gorm.Open("sqlite3", "lib/lib_files/User_Account.db")
 	if err != nil {
 		panic("failed to retrieve")
 	} else {
@@ -51,7 +49,7 @@ func Retrieve_Account(id uint16) (result Users_Info, err error) {
 // 查询表中是否有同样的昵称，如果有，则返回false
 func Retrieve_UserName(name string) (result Users_Info) {
 	var user Users_Info
-	db, err := gorm.Open("sqlite3", "lib/lib_file/User_Account.db")
+	db, err := gorm.Open("sqlite3", "lib/lib_files/User_Account.db")
 	if err != nil {
 		panic("failed to retrieve")
 	}
@@ -62,7 +60,7 @@ func Retrieve_UserName(name string) (result Users_Info) {
 
 func Update_Account(id uint16, name string) (result Users_Info, err error) {
 	var user Users_Info
-	db, err := gorm.Open("sqlite3", "lib/lib_file/User_Account.db")
+	db, err := gorm.Open("sqlite3", "lib/lib_files/User_Account.db")
 	if err != nil {
 		panic("failed to retrieve")
 	}
@@ -74,7 +72,7 @@ func Update_Account(id uint16, name string) (result Users_Info, err error) {
 
 func Delete_Account(id uint16) (err error) {
 	var user Users_Info
-	db, err := gorm.Open("sqlite3", "lib/lib_file/User_Account.db")
+	db, err := gorm.Open("sqlite3", "lib/lib_files/User_Account.db")
 	if err != nil {
 		panic("failed to delete")
 	}

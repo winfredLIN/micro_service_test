@@ -28,16 +28,17 @@ var config = greeting.Config{
 
 func main() {
 
-	// 建立服务并且注册
+	// "建立"服务并且注册
 	greetingServiceServer := greeting.NewServer()
 	greetingRegistrationServer := greeting.NewRegistrationServer()
 	LoginServiceServer := login.NewLoginServer()
 
 	grpcServer := grpc.NewServer()
-	// 注册需要注册gRPC的服务以及在protoc定义的服务
+	// "注册"需要注册gRPC的服务以及在protoc定义的服务
 	pb.RegisterGreetingServiceServer(grpcServer, greetingServiceServer)
 	pb.RegisterRegistrationServiceServer(grpcServer, greetingRegistrationServer)
 	pb.RegisterLoginServiceServer(grpcServer, LoginServiceServer)
+	
 	// 监听信道是否拥挤？
 	listener, err := net.Listen("tcp", config.Port)
 

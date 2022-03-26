@@ -1,12 +1,17 @@
 go 1.18
 
 use (
+	./GinService/LoginService
+	./GinService/getparam
 	./LaunchService/client
 	./api/protobuf/greeting
 	./cmd/greeting/client
 	./cmd/greeting/server
 	./config
-	./lib/dbcontext
+	./lib/Commodity_Infor
+	./lib/Commodity_Order
+	./lib/User_Account
+	./lib/User_Payment
 	./lib/lib_test
 	./services/greeting
 	./services/login

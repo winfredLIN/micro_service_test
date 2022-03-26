@@ -38,6 +38,8 @@ service LoginService {
 
 message LoginRequest {
     bool LoginCall = 1;
+    string Username = 2;
+    string Password = 3;
 }
 
 message LoginResponse {

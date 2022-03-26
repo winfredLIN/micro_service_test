@@ -5,7 +5,7 @@ import (
 	"context"
 	"fmt"
 
-	"lib/dbcontext"
+	"lib/User_Account"
 )
 
 type Server struct {
@@ -37,7 +37,7 @@ func (s *Server) Register(ctx context.Context, req *pb.RegisterRequest) (*pb.Reg
 	for {
 		fmt.Printf("创建账号 \n 请输入用户名：")
 		fmt.Scan(&username)
-		name := dbcontext.Retrieve_UserName(username).Name
+		name := User_Account.Retrieve_UserName(username).Name
 		fmt.Printf("创建的名字 %s ，查询的名字 %s", username, name)
 		if name == username {
 			fmt.Println("用户名重复，请重新输入")
@@ -54,7 +54,7 @@ func (s *Server) Register(ctx context.Context, req *pb.RegisterRequest) (*pb.Reg
 		fmt.Printf("\n 请确认密码：")
 		fmt.Scan(&userpassword2)
 		if userpassword1 == userpassword2 {
-			dbcontext.Create_Account(username, userpassword1)
+			User_Account.Create_Account(username, userpassword1)
 			fmt.Print("成功创建账号")
 			break
 		} else {
