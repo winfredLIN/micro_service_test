@@ -1,7 +1,7 @@
 package login
 
 import (
-	pb "api/protobuf/greeting"
+	pb "api/protobuf/user"
 	"context"
 
 	"lib/User_Account"
@@ -18,11 +18,11 @@ func NewLoginServer() pb.LoginServiceServer {
 
 // 接收gin传来的用户名密码，访问数据库判断用户名密码是否正确
 func (s *Server) Login(ctx context.Context, req *pb.LoginRequest) (*pb.LoginResponse, error) {
-
-	if req.Username != User_Account.Retrieve_UserName(req.Username).Name {
+	user, _ := User_Account.Retrieve_UserName(req.Username)
+	if req.Username != user.Name {
 		return &pb.LoginResponse{LoginAnswer: "用户名不存在"}, nil
 	}
-	if req.Password == User_Account.Retrieve_UserName(req.Username).Password {
+	if req.Password == user.Password {
 		return &pb.LoginResponse{LoginAnswer: "登陆成功"}, nil
 	} else {
 		return &pb.LoginResponse{LoginAnswer: "密码错误请重新登陆"}, nil

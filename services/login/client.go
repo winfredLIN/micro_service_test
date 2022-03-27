@@ -3,7 +3,7 @@ package login
 import (
 	"context"
 	"fmt"
-	pb "api/protobuf/greeting"
+	pb "api/protobuf/user"
 	"time"
 	cfg "config"
 	"google.golang.org/grpc"

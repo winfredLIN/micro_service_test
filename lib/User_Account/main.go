@@ -16,8 +16,8 @@ type Users_Info struct {
 	Password string //
 }
 
-// 如果没有表要先创建一个表
-func Create_Account(name string, password string) (err error) {
+// 新建用户 输入：昵称 密码 输出：用户，err
+func Create_Account(name string, password string) (result Users_Info, err error) {
 	db, err := gorm.Open("sqlite3", "lib/lib_files/User_Account.db")
 	if err != nil {
 		panic("failed to connect database")
@@ -27,9 +27,10 @@ func Create_Account(name string, password string) (err error) {
 	db.AutoMigrate(Users_Info{})
 	user := Users_Info{Name: name, Password: password}
 	db.Create(&user)
-	return nil
+	return user, nil
 }
 
+// 查找用户信息 输入：用户id 输出：用户信息
 func Retrieve_Account(id uint16) (result Users_Info, err error) {
 	var User Users_Info
 	db, err := gorm.Open("sqlite3", "lib/lib_files/User_Account.db")
@@ -46,8 +47,8 @@ func Retrieve_Account(id uint16) (result Users_Info, err error) {
 	return User, nil
 }
 
-// 查询表中是否有同样的昵称，如果有，则返回false
-func Retrieve_UserName(name string) (result Users_Info) {
+// 通过昵称查找用户信息 输入：用户昵称 输出：用户信息
+func Retrieve_UserName(name string) (result Users_Info, err error) {
 	var user Users_Info
 	db, err := gorm.Open("sqlite3", "lib/lib_files/User_Account.db")
 	if err != nil {
@@ -55,9 +56,10 @@ func Retrieve_UserName(name string) (result Users_Info) {
 	}
 	defer db.Close()
 	db.Where("name = ?", name).First(&user)
-	return user
+	return user, err
 }
 
+// 更改用户名称 输入：用户id ，新的名称 输出：用户信息，err
 func Update_Account(id uint16, name string) (result Users_Info, err error) {
 	var user Users_Info
 	db, err := gorm.Open("sqlite3", "lib/lib_files/User_Account.db")
@@ -70,6 +72,7 @@ func Update_Account(id uint16, name string) (result Users_Info, err error) {
 	return user, nil
 }
 
+// 删除账户 输入：用户id 输出：err
 func Delete_Account(id uint16) (err error) {
 	var user Users_Info
 	db, err := gorm.Open("sqlite3", "lib/lib_files/User_Account.db")

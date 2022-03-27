@@ -1,7 +1,7 @@
 package client
 
 import (
-	pb "api/protobuf/greeting"
+	pb "api/protobuf/user"
 	"context"
 	"fmt"
 	"log"
@@ -21,25 +21,6 @@ func LaunchLoginClient(username string, password string) (answer string) {
 	}
 
 	return loginResponse.LoginAnswer
-}
-
-// 应该加一个传入gin 给的参数的入口
-func LaunchGreetingClient(name string) bool {
-	//客户端：问候
-	name1 := name
-	client, err := greeting.NewClient()
-	if err != nil {
-		log.Fatalln(err)
-	}
-
-	//发送SayHelloRequest，包括内容Name
-	res, err := client.SayHello(context.Background(), &pb.SayHelloRequest{SayHelloName: name1})
-	if err != nil {
-		log.Fatalln(err)
-	}
-
-	fmt.Println(res.SayHelloAnswer)
-	return true
 }
 
 func LaunchRegistrationClient() bool {

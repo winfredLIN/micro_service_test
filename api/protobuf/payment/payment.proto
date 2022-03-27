@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+option go_package = "api/protobuf/payment";
+
+package api.protobuf.payment;
+
+service PaymentService {
+	rpc Pay (PayRequest) returns (PayResponse);
+	rpc Refund(RefundRequest) returns(RefundResponse);
+}
+
+message PayRequest {
+	bool PayCall = 1;
+}
+
+message PayResponse {
+	bool PayAnswer =1;
+}
+
+message RefundRequest {
+	uint32 id = 1;
+}
+message RefundResponse {
+	float AccountBalance=1;
+	bool Premium=2;    
+	string RecevingAddress=3;
+}

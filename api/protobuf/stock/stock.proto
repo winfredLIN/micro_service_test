@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+option go_package = "api/protobuf/stock";
+
+package api.protobuf.stock;
+
+// 
+service SrockService {
+	// 商品库存变动
+	rpc StockChange(ChangeRequest) returns(ChangeResponse);
+	rpc StockLook(LookRequest) returns(LookResponse);
+}
+// 
+message ChangeRequest {
+    bool AddCall = 1;
+    string CommodityPrice = 2;
+	uint32 CommodityId =3;
+	uint32 CommodityNumber = 4;
+	string CommodityName =5;
+}
+
+message ChangeResponse {
+    bool AddAnswer = 1;
+}
+
+message LookRequest {
+	bool LookRequest =1;
+}
+message LookResponse {
+	bool LookResponse =1;
+}

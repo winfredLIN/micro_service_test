@@ -1,7 +1,7 @@
 package greeting
 
 import (
-	pb "api/protobuf/greeting"
+	pb "api/protobuf/user"
 	"context"
 	"fmt"
 
@@ -9,20 +9,8 @@ import (
 )
 
 type Server struct {
-	pb.GreetingServiceServer
 	pb.RegistrationServiceServer
 	pb.LoginServiceServer
-}
-
-// 实现问候服务
-func NewServer() pb.GreetingServiceServer {
-	return &Server{}
-}
-
-func (s *Server) SayHello(ctx context.Context, req *pb.SayHelloRequest) (*pb.SayHelloResponse, error) {
-	return &pb.SayHelloResponse{
-		SayHelloAnswer: "hello " + req.SayHelloName,
-	}, nil
 }
 
 // 实现注册服务
@@ -37,7 +25,8 @@ func (s *Server) Register(ctx context.Context, req *pb.RegisterRequest) (*pb.Reg
 	for {
 		fmt.Printf("创建账号 \n 请输入用户名：")
 		fmt.Scan(&username)
-		name := User_Account.Retrieve_UserName(username).Name
+		user, _ := User_Account.Retrieve_UserName(username)
+		name := user.Name
 		fmt.Printf("创建的名字 %s ，查询的名字 %s", username, name)
 		if name == username {
 			fmt.Println("用户名重复，请重新输入")

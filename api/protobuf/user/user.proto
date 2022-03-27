@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+option go_package = "api/protobuf/user";
+
+package api.protobuf.user;
+
+service LoginService {
+	rpc Login(LoginRequest) returns(LoginResponse);
+}
+message LoginRequest {
+    bool LoginCall = 1;
+    string Username = 2;
+    string Password = 3;
+}
+
+message LoginResponse {
+    string LoginAnswer = 1;
+}
+
+service RegistrationService {
+    rpc Register(RegisterRequest) returns(RegisterResponse);
+}
+
+message RegisterRequest {
+    bool RegisterCall = 1;
+	string Username = 2;
+    string Password = 3;
+}
+
+message RegisterResponse {
+    string RegisterAnswer = 1;
+}

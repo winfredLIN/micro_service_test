@@ -4,12 +4,16 @@ use (
 	./GinService/LoginService
 	./GinService/getparam
 	./LaunchService/client
-	./api/protobuf/greeting
+	./api/protobuf/commodity
+	./api/protobuf/stock
+	./api/protobuf/payment
+	./api/protobuf/user
 	./cmd/greeting/client
 	./cmd/greeting/server
 	./config
 	./lib/Commodity_Infor
-	./lib/Commodity_Order
+	./lib/Commodity_Stock
+	./lib/Shopping_Cart
 	./lib/User_Account
 	./lib/User_Payment
 	./lib/lib_test

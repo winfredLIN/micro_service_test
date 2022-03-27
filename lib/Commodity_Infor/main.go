@@ -15,7 +15,7 @@ type Commodity struct {
 	Price                float32
 }
 
-func New_Commodity(commodity Commodity) (err error) {
+func New_Commodity(Name string, Type string, Discription string, Price float32) (err error) {
 	db, err := gorm.Open("sqlite3", "lib/lib_files/Commodity_Infor.db")
 	if err != nil {
 		panic("failed to connect database")
@@ -23,12 +23,12 @@ func New_Commodity(commodity Commodity) (err error) {
 	defer db.Close()
 
 	db.AutoMigrate(Commodity{})
-	product := Commodity{CommodityName: commodity.CommodityName, CommodityType: commodity.CommodityType, CommodityDiscription: commodity.CommodityDiscription, Price: commodity.Price}
+	product := Commodity{CommodityName: Name, CommodityType: Type, CommodityDiscription: Discription, Price: Price}
 	db.Create(&product)
 	return nil
 }
 
-func Retrieve_Commodity(commodityName string) (result Commodity, err error) {
+func Retrieve_Commodity(id uint) (result Commodity, err error) {
 	var commodity Commodity
 	db, err := gorm.Open("sqlite3", "lib/lib_files/Commodity_Infor.db")
 	if err != nil {
@@ -38,8 +38,7 @@ func Retrieve_Commodity(commodityName string) (result Commodity, err error) {
 	}
 	defer db.Close()
 
-	db.First(&commodity, "CommodityName = ?", commodityName)
-
+	db.First(&commodity, "id = ?", id)
 	return commodity, nil
 }
 
