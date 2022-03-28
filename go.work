@@ -6,6 +6,7 @@ use (
 	./LaunchService/client
 	./api/protobuf/commodity
 	./api/protobuf/payment
+	./api/protobuf/shoppingCart
 	./api/protobuf/stock
 	./api/protobuf/user
 	./cmd/greeting/client

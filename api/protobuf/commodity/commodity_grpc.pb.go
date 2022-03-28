@@ -14,86 +14,122 @@ import (
 // Requires gRPC-Go v1.32.0 or later.
 const _ = grpc.SupportPackageIsVersion7
 
-// CartServiceClient is the client API for CartService service.
+// CommodityServiceClient is the client API for CommodityService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type CartServiceClient interface {
-	CartAdd(ctx context.Context, in *AddRequest, opts ...grpc.CallOption) (*AddResponse, error)
+type CommodityServiceClient interface {
+	CommodityAdd(ctx context.Context, in *AddRequest, opts ...grpc.CallOption) (*AddResponse, error)
+	CommodityShow(ctx context.Context, in *ShowRequest, opts ...grpc.CallOption) (*ShowResponse, error)
 }
 
-type cartServiceClient struct {
+type commodityServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewCartServiceClient(cc grpc.ClientConnInterface) CartServiceClient {
-	return &cartServiceClient{cc}
+func NewCommodityServiceClient(cc grpc.ClientConnInterface) CommodityServiceClient {
+	return &commodityServiceClient{cc}
 }
 
-func (c *cartServiceClient) CartAdd(ctx context.Context, in *AddRequest, opts ...grpc.CallOption) (*AddResponse, error) {
+func (c *commodityServiceClient) CommodityAdd(ctx context.Context, in *AddRequest, opts ...grpc.CallOption) (*AddResponse, error) {
 	out := new(AddResponse)
-	err := c.cc.Invoke(ctx, "/api.protobuf.commodity.CartService/CartAdd", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/api.protobuf.commodity.CommodityService/CommodityAdd", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// CartServiceServer is the server API for CartService service.
-// All implementations must embed UnimplementedCartServiceServer
+func (c *commodityServiceClient) CommodityShow(ctx context.Context, in *ShowRequest, opts ...grpc.CallOption) (*ShowResponse, error) {
+	out := new(ShowResponse)
+	err := c.cc.Invoke(ctx, "/api.protobuf.commodity.CommodityService/CommodityShow", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// CommodityServiceServer is the server API for CommodityService service.
+// All implementations must embed UnimplementedCommodityServiceServer
 // for forward compatibility
-type CartServiceServer interface {
-	CartAdd(context.Context, *AddRequest) (*AddResponse, error)
-	mustEmbedUnimplementedCartServiceServer()
+type CommodityServiceServer interface {
+	CommodityAdd(context.Context, *AddRequest) (*AddResponse, error)
+	CommodityShow(context.Context, *ShowRequest) (*ShowResponse, error)
+	mustEmbedUnimplementedCommodityServiceServer()
 }
 
-// UnimplementedCartServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedCartServiceServer struct {
+// UnimplementedCommodityServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedCommodityServiceServer struct {
 }
 
-func (UnimplementedCartServiceServer) CartAdd(context.Context, *AddRequest) (*AddResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CartAdd not implemented")
+func (UnimplementedCommodityServiceServer) CommodityAdd(context.Context, *AddRequest) (*AddResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CommodityAdd not implemented")
 }
-func (UnimplementedCartServiceServer) mustEmbedUnimplementedCartServiceServer() {}
+func (UnimplementedCommodityServiceServer) CommodityShow(context.Context, *ShowRequest) (*ShowResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CommodityShow not implemented")
+}
+func (UnimplementedCommodityServiceServer) mustEmbedUnimplementedCommodityServiceServer() {}
 
-// UnsafeCartServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to CartServiceServer will
+// UnsafeCommodityServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to CommodityServiceServer will
 // result in compilation errors.
-type UnsafeCartServiceServer interface {
-	mustEmbedUnimplementedCartServiceServer()
+type UnsafeCommodityServiceServer interface {
+	mustEmbedUnimplementedCommodityServiceServer()
 }
 
-func RegisterCartServiceServer(s grpc.ServiceRegistrar, srv CartServiceServer) {
-	s.RegisterService(&CartService_ServiceDesc, srv)
+func RegisterCommodityServiceServer(s grpc.ServiceRegistrar, srv CommodityServiceServer) {
+	s.RegisterService(&CommodityService_ServiceDesc, srv)
 }
 
-func _CartService_CartAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _CommodityService_CommodityAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(AddRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CartServiceServer).CartAdd(ctx, in)
+		return srv.(CommodityServiceServer).CommodityAdd(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/api.protobuf.commodity.CartService/CartAdd",
+		FullMethod: "/api.protobuf.commodity.CommodityService/CommodityAdd",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CartServiceServer).CartAdd(ctx, req.(*AddRequest))
+		return srv.(CommodityServiceServer).CommodityAdd(ctx, req.(*AddRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// CartService_ServiceDesc is the grpc.ServiceDesc for CartService service.
+func _CommodityService_CommodityShow_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ShowRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CommodityServiceServer).CommodityShow(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.protobuf.commodity.CommodityService/CommodityShow",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CommodityServiceServer).CommodityShow(ctx, req.(*ShowRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// CommodityService_ServiceDesc is the grpc.ServiceDesc for CommodityService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var CartService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "api.protobuf.commodity.CartService",
-	HandlerType: (*CartServiceServer)(nil),
+var CommodityService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "api.protobuf.commodity.CommodityService",
+	HandlerType: (*CommodityServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "CartAdd",
-			Handler:    _CartService_CartAdd_Handler,
+			MethodName: "CommodityAdd",
+			Handler:    _CommodityService_CommodityAdd_Handler,
+		},
+		{
+			MethodName: "CommodityShow",
+			Handler:    _CommodityService_CommodityShow_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -10,12 +10,11 @@ import (
 type Commodity struct {
 	gorm.Model
 	CommodityName        string
-	CommodityType        string
 	CommodityDiscription string
 	Price                float32
 }
 
-func New_Commodity(Name string, Type string, Discription string, Price float32) (err error) {
+func New_Commodity(Name string, Discription string, Price float32) (restlt Commodity, err error) {
 	db, err := gorm.Open("sqlite3", "lib/lib_files/Commodity_Infor.db")
 	if err != nil {
 		panic("failed to connect database")
@@ -23,9 +22,9 @@ func New_Commodity(Name string, Type string, Discription string, Price float32) 
 	defer db.Close()
 
 	db.AutoMigrate(Commodity{})
-	product := Commodity{CommodityName: Name, CommodityType: Type, CommodityDiscription: Discription, Price: Price}
+	product := Commodity{CommodityName: Name, CommodityDiscription: Discription, Price: Price}
 	db.Create(&product)
-	return nil
+	return product, nil
 }
 
 func Retrieve_Commodity(id uint) (result Commodity, err error) {

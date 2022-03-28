@@ -5,34 +5,27 @@ option go_package = "api/protobuf/commodity";
 package api.protobuf.commodity;
 
 // 购物车加入商品的服务，发送请求：用户id 商品信息 返回：成功或者失败
-service CartService {
-	rpc CartAdd(AddRequest) returns(AddResponse);
-	rpc CartLook(LookRequest) returns(LookResponse);
+service CommodityService {
+	rpc CommodityAdd(AddRequest) returns(AddResponse);
 	rpc CommodityShow(ShowRequest) returns(ShowResponse);
 }
 // 
 message AddRequest {
-    bool AddCall = 1;
+	uint32 CommodityId = 1;
     string CommodityName = 2;
-    string CommodityPrice = 3;
-	uint32 UserId =4;
-	uint32 CommodityId =5;
+    float CommodityPrice = 3;
+	string CommodityDiscription = 4;
 }
 
 message AddResponse {
-    bool AddAnswer = 1;
+    uint32 IdResponse = 1;
 }
 
 message ShowRequest {
-	bool ShowRequest =1;
+	uint32 CommodityId = 1;
 }
 message ShowResponse {
-	bool ShowResponse =1;
-}
-
-message LookRequest {
-	bool LookRequest =1;
-}
-message LookResponse {
-	bool LookResponse =1;
+	string NameResponse = 1;
+    float PriceResponse = 2;
+	string CommodityDiscription = 3;
 }

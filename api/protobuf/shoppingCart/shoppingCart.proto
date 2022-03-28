@@ -1,0 +1,36 @@
+syntax = "proto3";
+option go_package = "api/protobuf/shoppingCart";
+
+package api.protobuf.shoppingCart;
+
+// 购物车加入商品的服务，发送请求：用户id 商品信息 返回：成功或者失败
+service CartService {
+	rpc CartAdd(AddRequest) returns(AddResponse);
+	rpc CartLook(LookRequest) returns(LookResponse);
+	rpc CommodityShow(ShowRequest) returns(ShowResponse);
+} 
+
+message AddRequest {
+    string CommodityName = 1;
+    string CommodityPrice = 2;
+	uint32 UserId =3;
+	uint32 CommodityId =4;
+}
+
+message AddResponse {
+    bool AddAnswer = 1;
+}
+
+message ShowRequest {
+	bool ShowRequest =1;
+}
+message ShowResponse {
+	bool ShowResponse =1;
+}
+
+message LookRequest {
+	bool LookRequest =1;
+}
+message LookResponse {
+	bool LookResponse =1;
+}
