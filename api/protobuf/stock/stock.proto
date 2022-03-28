@@ -7,7 +7,7 @@ package api.protobuf.stock;
 // 
 service StockService {
 	// 商品库存变动
-	rpc StockChange(ChangeRequest) returns(ChangeResponse);
+	rpc StockChangeNum(ChangeRequest) returns(ChangeResponse);
 	rpc StockShow(ShowRequest) returns(ShowResponse);
 }
 // 
@@ -24,8 +24,11 @@ message ChangeResponse {
 }
 
 message ShowRequest {
-	bool ShowRequest =1;
+	uint32 CommodityId =1;
 }
 message ShowResponse {
-	bool ShowResponse =1;
+	float CommodityPrice = 1;
+	uint32 CommodityId =2;
+	uint32 CommodityNumber = 3;
+	string CommodityName =4;
 }

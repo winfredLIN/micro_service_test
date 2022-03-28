@@ -12,9 +12,10 @@ type Stock struct {
 	CommoditiesId     uint
 	CommoditiesName   string
 	CommoditiesNumber int
+	CommoditiesPrice  float32
 }
 
-func New_Stock(id uint, name string, number int) (err error) {
+func New_Stock(id uint, name string, number int,price float32) (err error) {
 	db, err := gorm.Open("sqlite3", "lib/lib_files/Commodity_Stock.db")
 	if err != nil {
 		panic("failed to connect database")
@@ -22,7 +23,7 @@ func New_Stock(id uint, name string, number int) (err error) {
 	defer db.Close()
 
 	db.AutoMigrate(Stock{})
-	stock := Stock{CommoditiesId: id, CommoditiesName: name, CommoditiesNumber: number}
+	stock := Stock{CommoditiesId: id, CommoditiesName: name, CommoditiesNumber: number,CommoditiesPrice: price}
 	db.Create(&stock)
 	return nil
 }
