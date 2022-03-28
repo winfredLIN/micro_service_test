@@ -1,13 +1,12 @@
 package main
 
 import (
-	"log"
 	pb "api/protobuf/user"
-	"services/greeting"
-	"services/login"
+	"log"
 	"net"
 	"os"
 	"os/signal"
+	login "services/userService"
 	"syscall"
 
 	cfg "config"
@@ -21,7 +20,7 @@ type Config struct {
 	Port string
 }
 
-var config = greeting.Config{
+var config = login.Config{
 	Host: cfg.GetConfig().Server.Host,
 	Port: ":" + cfg.GetConfig().Server.Port,
 }
@@ -29,14 +28,14 @@ var config = greeting.Config{
 func main() {
 
 	// "建立"服务并且注册
-	greetingRegistrationServer := greeting.NewRegistrationServer()
+	greetingRegistrationServer := login.NewRegistrationServer()
 	LoginServiceServer := login.NewLoginServer()
 
 	grpcServer := grpc.NewServer()
 	// "注册"需要注册gRPC的服务以及在protoc定义的服务
 	pb.RegisterRegistrationServiceServer(grpcServer, greetingRegistrationServer)
 	pb.RegisterLoginServiceServer(grpcServer, LoginServiceServer)
-	
+
 	// 监听信道是否拥挤？
 	listener, err := net.Listen("tcp", config.Port)
 

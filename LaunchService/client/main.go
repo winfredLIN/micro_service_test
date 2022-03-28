@@ -5,8 +5,7 @@ import (
 	"context"
 	"fmt"
 	"log"
-	"services/greeting"
-	"services/login"
+	login "services/userService"
 )
 
 // 开放用户名密码的接口给gin
@@ -20,12 +19,12 @@ func LaunchLoginClient(username string, password string) (answer string) {
 		log.Fatalln(err)
 	}
 
-	return loginResponse.LoginAnswer
+	return loginResponse.Password
 }
 
 func LaunchRegistrationClient() bool {
 	// 客户端：注册
-	client, err := greeting.NewRegistrationClient()
+	client, err := login.NewRegistrationClient()
 	if err != nil {
 		log.Fatalln(err)
 	}
@@ -35,6 +34,6 @@ func LaunchRegistrationClient() bool {
 	if err != nil {
 		log.Fatalln(err)
 	}
-	fmt.Print("answer is", res1.RegisterAnswer)
+	fmt.Print("answer is", res1.AccountNumber)
 	return true
 }
