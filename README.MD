@@ -27,17 +27,24 @@ micro_service
 ├─README.MD
 ├─go.work
 ├─go.work.sum
+├─test.txt
 ├─services
-|    ├─login
-|    |   ├─client.go
-|    |   ├─go.mod
-|    |   ├─go.sum
-|    |   └server.go
-|    ├─greeting
-|    |    ├─client.go
-|    |    ├─go.mod
-|    |    ├─go.sum
-|    |    └server.go
+|    ├─userService
+|    |      ├─client.go
+|    |      ├─go.mod
+|    |      └server.go
+|    ├─stockService
+|    |      ├─client.go
+|    |      ├─go.mod
+|    |      └server.go
+|    ├─paymentService
+|    |       ├─client.go
+|    |       ├─go.mod
+|    |       └server.go
+|    ├─commodityService
+|    |        ├─client.go
+|    |        ├─go.mod
+|    |        └server.go
 ├─lib
 |  ├─.DS_Store
 |  ├─lib_test
@@ -61,6 +68,7 @@ micro_service
 |  |       └main.go
 |  ├─Commodity_Stock
 |  |        ├─go.mod
+|  |        ├─go.sum
 |  |        └main.go
 |  ├─Commodity_Infor
 |  |        ├─go.mod
@@ -81,6 +89,9 @@ micro_service
 |  |    ├─client
 |  |    |   ├─go.mod
 |  |    |   └main.go
+|  ├─Payment
+|  ├─Login
+|  ├─Browse
 ├─api
 |  ├─protobuf
 |  |    ├─user
@@ -93,6 +104,11 @@ micro_service
 |  |    |   ├─stock.pb.go
 |  |    |   ├─stock.proto
 |  |    |   └stock_grpc.pb.go
+|  |    ├─shoppingCart
+|  |    |      ├─go.mod
+|  |    |      ├─shoppingCart.pb.go
+|  |    |      ├─shoppingCart.proto
+|  |    |      └shoppingCart_grpc.pb.go
 |  |    ├─payment
 |  |    |    ├─go.mod
 |  |    |    ├─payment.pb.go
@@ -103,12 +119,13 @@ micro_service
 |  |    |     ├─commodity.proto
 |  |    |     ├─commodity_grpc.pb.go
 |  |    |     └go.mod
-├─LaunchService    
+├─LaunchService
 |       ├─server
 |       ├─client
 |       |   ├─go.mod
 |       |   └main.go
 ├─GinService
+|     ├─.DS_Store
 |     ├─getparam
 |     |    ├─go.mod
 |     |    ├─go.sum
@@ -119,3 +136,6 @@ micro_service
 |     |      ├─go.sum
 |     |      └login.html
 ├─BFF
+|  ├─PaymentBFF
+|  ├─LoginBFF
+|  ├─BrowseBFF
