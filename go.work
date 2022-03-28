@@ -19,5 +19,6 @@ use (
 	./lib/User_Payment
 	./lib/lib_test
 	./services/commodityService
+	./services/stockService
 	./services/userService
 )

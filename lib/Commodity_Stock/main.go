@@ -7,7 +7,6 @@ import (
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
 )
 
-// 关联数据库 建立外键
 type Stock struct {
 	gorm.Model
 	CommoditiesId     uint
@@ -22,8 +21,8 @@ func New_Stock(id uint, name string, number int) (err error) {
 	}
 	defer db.Close()
 
-	db.AutoMigrate(Stock{CommoditiesId: id, CommoditiesName: name, CommoditiesNumber: number})
-	stock := Stock{}
+	db.AutoMigrate(Stock{})
+	stock := Stock{CommoditiesId: id, CommoditiesName: name, CommoditiesNumber: number}
 	db.Create(&stock)
 	return nil
 }
@@ -52,5 +51,16 @@ func Delete_Stock(Id uint) (err error) {
 	defer db.Close()
 
 	db.Where("Id = ?", Id).Delete(&stock)
+	return nil
+}
+
+func Update_Number(id uint, number int) (err error) {
+	db, err := gorm.Open("sqlite3", "lib/lib_files/Commodity_Stock.db")
+	if err != nil {
+		panic("failed to retrieve")
+	}
+	defer db.Close()
+
+	db.Model(&Stock{}).Where("CommoditiesId  = ?", id).Update("CommoditiesNumber", number)
 	return nil
 }

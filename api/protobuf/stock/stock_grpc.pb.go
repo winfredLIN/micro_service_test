@@ -14,124 +14,124 @@ import (
 // Requires gRPC-Go v1.32.0 or later.
 const _ = grpc.SupportPackageIsVersion7
 
-// SrockServiceClient is the client API for SrockService service.
+// StockServiceClient is the client API for StockService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type SrockServiceClient interface {
+type StockServiceClient interface {
 	// 商品库存变动
 	StockChange(ctx context.Context, in *ChangeRequest, opts ...grpc.CallOption) (*ChangeResponse, error)
-	StockLook(ctx context.Context, in *LookRequest, opts ...grpc.CallOption) (*LookResponse, error)
+	StockShow(ctx context.Context, in *ShowRequest, opts ...grpc.CallOption) (*ShowResponse, error)
 }
 
-type srockServiceClient struct {
+type stockServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewSrockServiceClient(cc grpc.ClientConnInterface) SrockServiceClient {
-	return &srockServiceClient{cc}
+func NewStockServiceClient(cc grpc.ClientConnInterface) StockServiceClient {
+	return &stockServiceClient{cc}
 }
 
-func (c *srockServiceClient) StockChange(ctx context.Context, in *ChangeRequest, opts ...grpc.CallOption) (*ChangeResponse, error) {
+func (c *stockServiceClient) StockChange(ctx context.Context, in *ChangeRequest, opts ...grpc.CallOption) (*ChangeResponse, error) {
 	out := new(ChangeResponse)
-	err := c.cc.Invoke(ctx, "/api.protobuf.stock.SrockService/StockChange", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/api.protobuf.stock.StockService/StockChange", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *srockServiceClient) StockLook(ctx context.Context, in *LookRequest, opts ...grpc.CallOption) (*LookResponse, error) {
-	out := new(LookResponse)
-	err := c.cc.Invoke(ctx, "/api.protobuf.stock.SrockService/StockLook", in, out, opts...)
+func (c *stockServiceClient) StockShow(ctx context.Context, in *ShowRequest, opts ...grpc.CallOption) (*ShowResponse, error) {
+	out := new(ShowResponse)
+	err := c.cc.Invoke(ctx, "/api.protobuf.stock.StockService/StockShow", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// SrockServiceServer is the server API for SrockService service.
-// All implementations must embed UnimplementedSrockServiceServer
+// StockServiceServer is the server API for StockService service.
+// All implementations must embed UnimplementedStockServiceServer
 // for forward compatibility
-type SrockServiceServer interface {
+type StockServiceServer interface {
 	// 商品库存变动
 	StockChange(context.Context, *ChangeRequest) (*ChangeResponse, error)
-	StockLook(context.Context, *LookRequest) (*LookResponse, error)
-	mustEmbedUnimplementedSrockServiceServer()
+	StockShow(context.Context, *ShowRequest) (*ShowResponse, error)
+	mustEmbedUnimplementedStockServiceServer()
 }
 
-// UnimplementedSrockServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedSrockServiceServer struct {
+// UnimplementedStockServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedStockServiceServer struct {
 }
 
-func (UnimplementedSrockServiceServer) StockChange(context.Context, *ChangeRequest) (*ChangeResponse, error) {
+func (UnimplementedStockServiceServer) StockChange(context.Context, *ChangeRequest) (*ChangeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method StockChange not implemented")
 }
-func (UnimplementedSrockServiceServer) StockLook(context.Context, *LookRequest) (*LookResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method StockLook not implemented")
+func (UnimplementedStockServiceServer) StockShow(context.Context, *ShowRequest) (*ShowResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method StockShow not implemented")
 }
-func (UnimplementedSrockServiceServer) mustEmbedUnimplementedSrockServiceServer() {}
+func (UnimplementedStockServiceServer) mustEmbedUnimplementedStockServiceServer() {}
 
-// UnsafeSrockServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to SrockServiceServer will
+// UnsafeStockServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to StockServiceServer will
 // result in compilation errors.
-type UnsafeSrockServiceServer interface {
-	mustEmbedUnimplementedSrockServiceServer()
+type UnsafeStockServiceServer interface {
+	mustEmbedUnimplementedStockServiceServer()
 }
 
-func RegisterSrockServiceServer(s grpc.ServiceRegistrar, srv SrockServiceServer) {
-	s.RegisterService(&SrockService_ServiceDesc, srv)
+func RegisterStockServiceServer(s grpc.ServiceRegistrar, srv StockServiceServer) {
+	s.RegisterService(&StockService_ServiceDesc, srv)
 }
 
-func _SrockService_StockChange_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _StockService_StockChange_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ChangeRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SrockServiceServer).StockChange(ctx, in)
+		return srv.(StockServiceServer).StockChange(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/api.protobuf.stock.SrockService/StockChange",
+		FullMethod: "/api.protobuf.stock.StockService/StockChange",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SrockServiceServer).StockChange(ctx, req.(*ChangeRequest))
+		return srv.(StockServiceServer).StockChange(ctx, req.(*ChangeRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _SrockService_StockLook_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(LookRequest)
+func _StockService_StockShow_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ShowRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SrockServiceServer).StockLook(ctx, in)
+		return srv.(StockServiceServer).StockShow(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/api.protobuf.stock.SrockService/StockLook",
+		FullMethod: "/api.protobuf.stock.StockService/StockShow",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SrockServiceServer).StockLook(ctx, req.(*LookRequest))
+		return srv.(StockServiceServer).StockShow(ctx, req.(*ShowRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// SrockService_ServiceDesc is the grpc.ServiceDesc for SrockService service.
+// StockService_ServiceDesc is the grpc.ServiceDesc for StockService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var SrockService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "api.protobuf.stock.SrockService",
-	HandlerType: (*SrockServiceServer)(nil),
+var StockService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "api.protobuf.stock.StockService",
+	HandlerType: (*StockServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "StockChange",
-			Handler:    _SrockService_StockChange_Handler,
+			Handler:    _StockService_StockChange_Handler,
 		},
 		{
-			MethodName: "StockLook",
-			Handler:    _SrockService_StockLook_Handler,
+			MethodName: "StockShow",
+			Handler:    _StockService_StockShow_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

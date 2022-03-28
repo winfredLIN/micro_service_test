@@ -41,8 +41,7 @@ func Retrieve_Commodity(id uint) (result Commodity, err error) {
 	return commodity, nil
 }
 
-func Update_Commodity(id uint, newName string) (result Commodity, err error) {
-	var commodity Commodity
+func Update_Commodity(id uint, newName string) (err error) {
 	db, err := gorm.Open("sqlite3", "lib/lib_files/Commodity_Infor.db")
 	if err != nil {
 		panic("failed to retrieve")
@@ -50,7 +49,7 @@ func Update_Commodity(id uint, newName string) (result Commodity, err error) {
 	defer db.Close()
 
 	db.Model(&Commodity{}).Where("id = ?", id).Update("CommodityName", newName)
-	return commodity, nil
+	return nil
 }
 
 func Delete_Commodity(id uint) (err error) {
