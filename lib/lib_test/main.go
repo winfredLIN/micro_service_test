@@ -1,15 +1,14 @@
 package main
 
 import (
-	//"fmt"
-	"lib/Commodity_Infor"
+	"fmt"
+	"lib/User_Account"
 )
 
 func main() {
-	//Commodity_Infor.New_Commodity("法国Rouje online衫上衣女", "上衣", "品牌: ROUJE ONLINE", 521.99)
-	//Commodity_Infor.Delete_Commodity(2)
-	comodity, _ := Commodity_Infor.Retrieve_Commodity(3)
-
-	print(comodity.CommodityDiscription)
-
+	user,_ :=User_Account.Retrieve_UserName("haha")
+	fmt.Println(user.Password)
+	user1,err :=User_Account.Retrieve_UserName("name string")
+	fmt.Println(user1.Name)
+	fmt.Println(err)
 }

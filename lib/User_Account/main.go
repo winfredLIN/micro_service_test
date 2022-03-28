@@ -3,6 +3,8 @@ package User_Account
 import (
 	//"time"
 
+	"errors"
+
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
 )
@@ -56,7 +58,10 @@ func Retrieve_UserName(name string) (result Users_Info, err error) {
 	}
 	defer db.Close()
 	db.Where("name = ?", name).First(&user)
-	return user, err
+	if user.Name != name{
+		return user,errors.New("用户名不存在")
+	}
+	return user, nil
 }
 
 // 更改用户名称 输入：用户id ，新的名称 输出：用户信息，err

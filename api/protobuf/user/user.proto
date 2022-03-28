@@ -14,7 +14,8 @@ message LoginRequest {
 }
 
 message LoginResponse {
-    string LoginAnswer = 1;
+    bool NameCorrect = 1;
+    string Password = 2;
 }
 
 service RegistrationService {
@@ -28,5 +29,6 @@ message RegisterRequest {
 }
 
 message RegisterResponse {
-    string RegisterAnswer = 1;
+    bool NameExist = 1;
+    int32 AccountNumber = 2;
 }
