@@ -10,18 +10,20 @@ service PaymentService {
 }
 
 message PayRequest {
-	bool PayCall = 1;
+	uint32 UserId = 1;
+	float TotalPrice = 2;
 }
 
 message PayResponse {
-	bool PayAnswer =1;
+	float AccountBalance = 1;
+	bool Success = 2;
 }
 
 message RefundRequest {
-	uint32 id = 1;
+	uint32 UserId = 1;
+	float TotalPrice = 2;
 }
 message RefundResponse {
 	float AccountBalance=1;
-	bool Premium=2;    
-	string RecevingAddress=3;
+	bool Success = 2;
 }
