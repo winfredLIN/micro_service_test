@@ -6,6 +6,8 @@ use (
 	./GinService/getparam
 	./LaunchService/LaunchCommodity/client
 	./LaunchService/LaunchCommodity/server
+	./LaunchService/LaunchPayment/client
+	./LaunchService/LaunchPayment/server
 	./LaunchService/LaunchStock/client
 	./LaunchService/LaunchStock/server
 	./LaunchService/LaunchUser/client
