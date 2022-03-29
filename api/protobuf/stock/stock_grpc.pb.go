@@ -19,7 +19,7 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type StockServiceClient interface {
 	// 商品库存变动
-	StockChangeNum(ctx context.Context, in *ChangeRequest, opts ...grpc.CallOption) (*ChangeResponse, error)
+	StockChange(ctx context.Context, in *ChangeRequest, opts ...grpc.CallOption) (*ChangeResponse, error)
 	StockShow(ctx context.Context, in *ShowRequest, opts ...grpc.CallOption) (*ShowResponse, error)
 }
 
@@ -31,9 +31,9 @@ func NewStockServiceClient(cc grpc.ClientConnInterface) StockServiceClient {
 	return &stockServiceClient{cc}
 }
 
-func (c *stockServiceClient) StockChangeNum(ctx context.Context, in *ChangeRequest, opts ...grpc.CallOption) (*ChangeResponse, error) {
+func (c *stockServiceClient) StockChange(ctx context.Context, in *ChangeRequest, opts ...grpc.CallOption) (*ChangeResponse, error) {
 	out := new(ChangeResponse)
-	err := c.cc.Invoke(ctx, "/api.protobuf.stock.StockService/StockChangeNum", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/api.protobuf.stock.StockService/StockChange", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ func (c *stockServiceClient) StockShow(ctx context.Context, in *ShowRequest, opt
 // for forward compatibility
 type StockServiceServer interface {
 	// 商品库存变动
-	StockChangeNum(context.Context, *ChangeRequest) (*ChangeResponse, error)
+	StockChange(context.Context, *ChangeRequest) (*ChangeResponse, error)
 	StockShow(context.Context, *ShowRequest) (*ShowResponse, error)
 	mustEmbedUnimplementedStockServiceServer()
 }
@@ -63,8 +63,8 @@ type StockServiceServer interface {
 type UnimplementedStockServiceServer struct {
 }
 
-func (UnimplementedStockServiceServer) StockChangeNum(context.Context, *ChangeRequest) (*ChangeResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method StockChangeNum not implemented")
+func (UnimplementedStockServiceServer) StockChange(context.Context, *ChangeRequest) (*ChangeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method StockChange not implemented")
 }
 func (UnimplementedStockServiceServer) StockShow(context.Context, *ShowRequest) (*ShowResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method StockShow not implemented")
@@ -82,20 +82,20 @@ func RegisterStockServiceServer(s grpc.ServiceRegistrar, srv StockServiceServer)
 	s.RegisterService(&StockService_ServiceDesc, srv)
 }
 
-func _StockService_StockChangeNum_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _StockService_StockChange_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ChangeRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(StockServiceServer).StockChangeNum(ctx, in)
+		return srv.(StockServiceServer).StockChange(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/api.protobuf.stock.StockService/StockChangeNum",
+		FullMethod: "/api.protobuf.stock.StockService/StockChange",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(StockServiceServer).StockChangeNum(ctx, req.(*ChangeRequest))
+		return srv.(StockServiceServer).StockChange(ctx, req.(*ChangeRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -126,8 +126,8 @@ var StockService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*StockServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "StockChangeNum",
-			Handler:    _StockService_StockChangeNum_Handler,
+			MethodName: "StockChange",
+			Handler:    _StockService_StockChange_Handler,
 		},
 		{
 			MethodName: "StockShow",

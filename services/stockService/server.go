@@ -14,11 +14,16 @@ func NewStockServer() pb.StockServiceServer {
 	return &Server{}
 }
 
-//更改库存数量
-func (s *Server) StockChangeNum(ctx context.Context, req *pb.ChangeRequest) (*pb.ChangeResponse, error) {
+//更改库存数量 更改价格
+func (s *Server) StockChange(ctx context.Context, req *pb.ChangeRequest) (*pb.ChangeResponse, error) {
 	product, _ := stock.Retrieve_Stock(uint(req.CommodityId))
-	number := product.CommoditiesNumber + int(req.CommodityNumber)
-	stock.Update_Number(uint(req.CommodityId), number)
+	if req.ChangeCall == "number" {
+		number := product.CommoditiesNumber + int(req.CommodityNumber)
+		stock.Update_Number(uint(req.CommodityId), number)
+	}
+	if req.ChangeCall == "price" {
+		stock.Update_Price(uint(req.CommodityId), req.CommodityPrice)
+	}
 	return &pb.ChangeResponse{ChangeAnswer: true}, nil
 }
 

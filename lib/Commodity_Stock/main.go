@@ -65,3 +65,14 @@ func Update_Number(id uint, number int) (err error) {
 	db.Model(&Stock{}).Where("CommoditiesId  = ?", id).Update("CommoditiesNumber", number)
 	return nil
 }
+func Update_Price(id uint, price float32) (err error) {
+	db, err := gorm.Open("sqlite3", "lib/lib_files/Commodity_Stock.db")
+	if err != nil {
+		panic("failed to retrieve")
+	}
+	defer db.Close()
+
+	db.Model(&Stock{}).Where("CommoditiesId  = ?", id).Update("CommoditiesPrice", price)
+	return nil
+}
+
