@@ -1,16 +1,17 @@
 package main
 
 import (
-	"LaunchService/client"
-	//"fmt"
+	"LaunchService/LaunchUser/client"
+	"fmt"
+
 	//"GinService/getparam"
 	ginlogin "GinService/LoginService"
 )
 
 func main() {
 	username, passowrd := ginlogin.GinLogin()
-	answer := client.LaunchLoginClient(username, passowrd)
-	ginlogin.GinHello(username, answer)
+	cor, answer := client.LaunchLoginClient(username, passowrd)
+	fmt.Println(cor, answer)
 
 	//client.LaunchGreetingClient(getparam.Getparam())
 

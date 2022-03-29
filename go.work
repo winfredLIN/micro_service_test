@@ -1,9 +1,11 @@
 go 1.18
 
 use (
+	./BFF/LoginBFF
 	./GinService/LoginService
 	./GinService/getparam
-	./LaunchService/client
+	./LaunchService/LaunchUser/client
+	./LaunchService/LaunchUser/server
 	./api/protobuf/commodity
 	./api/protobuf/payment
 	./api/protobuf/shoppingCart
