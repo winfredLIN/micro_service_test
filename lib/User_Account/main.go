@@ -1,9 +1,6 @@
 package User_Account
 
 import (
-	//"time"
-
-	"errors"
 
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
@@ -58,9 +55,6 @@ func Retrieve_UserName(name string) (result Users_Info, err error) {
 	}
 	defer db.Close()
 	db.Where("name = ?", name).First(&user)
-	if user.Name != name{
-		return user,errors.New("用户名不存在")
-	}
 	return user, nil
 }
 

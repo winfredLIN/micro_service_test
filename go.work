@@ -1,7 +1,7 @@
 go 1.18
 
 use (
-	./BFF/LoginBFF
+	./BFF/PaymentBFF
 	./GinService/LoginService
 	./GinService/getparam
 	./LaunchService/LaunchCommodity/client

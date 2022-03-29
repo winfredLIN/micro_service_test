@@ -7,12 +7,12 @@ import (
 	payment "services/paymentService"
 )
 
-func LaunchPayClient(id uint32, totalPrice float32) (AccountBalance float32, success bool) {
+func LaunchPayClient(Userid uint32, totalPrice float32) (AccountBalance float32, success bool) {
 	Client, err := payment.NewPaymentClient()
 	if err != nil {
 		log.Fatalln(err)
 	}
-	Response, err := Client.Pay(context.Background(), &pb.PayRequest{UserId: id, TotalPrice: totalPrice})
+	Response, err := Client.Pay(context.Background(), &pb.PayRequest{UserId: Userid, TotalPrice: totalPrice})
 
 	if err != nil {
 		log.Fatalln(err)

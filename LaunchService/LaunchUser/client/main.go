@@ -8,17 +8,16 @@ import (
 )
 
 // 登陆
-func LaunchLoginClient(username string, password string) (nameCrrect bool, answer string) {
+func LaunchLoginClient(username string, password string) (nameCrrect bool, PasswordCorrect bool) {
 	Client, err := login.NewLoginClient()
 	if err != nil {
 		log.Fatalln(err)
 	}
-	loginResponse, err := Client.Login(context.Background(), &pb.LoginRequest{LoginCall: true, Username: username, Password: password})
+	Response, err := Client.Login(context.Background(), &pb.LoginRequest{LoginCall: true, Username: username, Password: password})
 	if err != nil {
 		log.Fatalln(err)
 	}
-
-	return loginResponse.NameCorrect, loginResponse.Password
+	return Response.NameCorrect, Response.PasswordCorrect
 }
 
 // 注册

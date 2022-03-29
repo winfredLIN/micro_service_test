@@ -27,15 +27,17 @@ func main() {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 			return
 		}
-		correct, answer := client.LaunchLoginClient(form.User, form.Pssword)
-		if correct == true {
-			c.JSON(http.StatusOK, gin.H{"status": "200"})
-			c.String(200, answer)
+		nameCorrect, PasswordCorrect := client.LaunchLoginClient(form.User, form.Pssword)
+		if nameCorrect == true && PasswordCorrect == true {
+			//c.JSON(http.StatusOK, gin.H{"status": "200"})
+			c.String(200, "登陆成功")
 		}
-		if correct == false {
-			c.String(404, answer)
+		if nameCorrect == false {
+			c.String(201, "账号不存在")
 		}
-
+		if PasswordCorrect == false {
+			c.String(202, "密码错误")
+		}
 	})
 	r.Run(":8000")
 }

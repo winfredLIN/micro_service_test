@@ -17,11 +17,14 @@ func NewLoginServer() pb.LoginServiceServer {
 
 // 输入：请求bool 用户名string 密码string，若用户名不存在返回false，err string“用户名不存在” 若正确则返回对应的账号密码
 func (s *Server) Login(ctx context.Context, req *pb.LoginRequest) (*pb.LoginResponse, error) {
-	user, err := account.Retrieve_UserName(req.Username)
-	if err != nil {
-		return &pb.LoginResponse{NameCorrect: false}, err
+	user, _ := account.Retrieve_UserName(req.Username)
+
+	if user.Name != req.Username {
+		return &pb.LoginResponse{NameCorrect: false}, nil
+	} else if user.Password != req.Password {
+		return &pb.LoginResponse{NameCorrect: true,PasswordCorrect: false}, nil
 	}
-	return &pb.LoginResponse{NameCorrect: true, Password: user.Password}, nil
+	return &pb.LoginResponse{NameCorrect: true, PasswordCorrect: true}, nil
 }
 
 func NewRegistrationServer() pb.RegistrationServiceServer {
