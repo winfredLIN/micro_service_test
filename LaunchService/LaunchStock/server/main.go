@@ -18,7 +18,7 @@ var config = stockService.Config{
 	Port: ":" + cfg.GetConfig().Server.Port,
 }
 
-func LaunchLoginServer() {
+func LaunchStockServer() {
 	// 建立服务并且注册
 	StockServer := stockService.NewStockServer()
 
