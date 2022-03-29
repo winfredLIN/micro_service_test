@@ -10,7 +10,7 @@ type Server struct {
 	pb.CommodityServiceServer
 }
 
-func NewCartAddServer() pb.CommodityServiceServer {
+func NewCommodityAddServer() pb.CommodityServiceServer {
 	return &Server{}
 }
 

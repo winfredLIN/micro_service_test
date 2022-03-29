@@ -4,6 +4,8 @@ use (
 	./BFF/LoginBFF
 	./GinService/LoginService
 	./GinService/getparam
+	./LaunchService/LaunchCommodity/client
+	./LaunchService/LaunchCommodity/server
 	./LaunchService/LaunchUser/client
 	./LaunchService/LaunchUser/server
 	./api/protobuf/commodity

@@ -1,12 +1,14 @@
 package main
 
 import (
-	"LaunchService/LaunchUser/server"
+	Commodity "LaunchService/LaunchCommodity/server"
+	User "LaunchService/LaunchUser/server"
 )
 
 func main() {
 
-	server.LaunchLoginServer()
-	server.LaunchRegistrationServer()
+	User.LaunchLoginServer()
+	User.LaunchRegistrationServer()
 
+	Commodity.LaunchCommodityServer()
 }
