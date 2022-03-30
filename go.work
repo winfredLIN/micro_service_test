@@ -2,32 +2,32 @@ go 1.18
 
 use (
 	./BFF/PaymentBFF
-	./GinService/LoginService
-	./GinService/getparam
-	./LaunchService/LaunchCommodity/client
-	./LaunchService/LaunchCommodity/server
-	./LaunchService/LaunchPayment/client
-	./LaunchService/LaunchPayment/server
-	./LaunchService/LaunchStock/client
-	./LaunchService/LaunchStock/server
-	./LaunchService/LaunchUser/client
-	./LaunchService/LaunchUser/server
 	./api/protobuf/commodity
 	./api/protobuf/payment
 	./api/protobuf/shoppingCart
 	./api/protobuf/stock
 	./api/protobuf/user
-	./cmd/Login
-	./cmd/Servers
+	./cmd/login
+	./cmd/server
 	./config
-	./lib/Commodity_Infor
-	./lib/Commodity_Stock
-	./lib/Shopping_Cart
-	./lib/User_Account
-	./lib/User_Payment
+	./ginservice/getparam
+	./ginservice/loginservice
+	./launchservice/launchcommodity/client
+	./launchservice/launchcommodity/server
+	./launchservice/launchpayment/client
+	./launchservice/launchpayment/server
+	./launchservice/launchstock/client
+	./launchservice/launchstock/server
+	./launchservice/launchuser/client
+	./launchservice/launchuser/server
+	./lib/commodityinfor
+	./lib/commoditystock
 	./lib/lib_test
-	./services/commodityService
-	./services/paymentService
-	./services/stockService
-	./services/userService
+	./lib/shoppingcart
+	./lib/useraccount
+	./lib/userpayment
+	./service/commodityservice
+	./service/paymentservice
+	./service/stockservice
+	./service/userservice
 )

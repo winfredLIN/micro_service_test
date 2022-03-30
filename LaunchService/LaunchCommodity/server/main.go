@@ -7,20 +7,20 @@ import (
 	"net"
 	"os"
 	"os/signal"
-	"services/commodityService"
+	"service/commodityservice"
 	"syscall"
 
 	"google.golang.org/grpc"
 )
 
-var config = commodityService.Config{
+var config = commodityservice.Config{
 	Host: cfg.GetConfig().Server.Host,
 	Port: ":" + cfg.GetConfig().Server.Port,
 }
 
 func LaunchCommodityServer() {
 	// 建立服务并且注册
-	CommodityServer := commodityService.NewCommodityAddServer()
+	CommodityServer := commodityservice.NewCommodityAddServer()
 
 	grpcServer := grpc.NewServer()
 	// 注册需要注册gRPC的服务以及在protoc定义的服务

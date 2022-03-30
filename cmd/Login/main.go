@@ -1,13 +1,13 @@
 package main
 
 import (
-	"LaunchService/LaunchUser/client"
+	"launchservice/launchuser/client"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
 
-type Login struct {
+type login struct {
 	// binding:"required"修饰的字段，若接收为空值，则报错，是必须字段
 	User    string `form:"username" json:"user" uri:"user" xml:"user" binding:"required"`
 	Pssword string `form:"password" json:"password" uri:"password" xml:"password" binding:"required"`
@@ -18,7 +18,7 @@ func main() {
 	// 默认使用了2个中间件Logger(), Recovery()
 	r := gin.Default()
 	// JSON绑定
-	var form Login
+	var form login
 	r.POST("/loginForm", func(c *gin.Context) {
 		// 声明接收的变量
 		// Bind()默认解析并绑定form格式

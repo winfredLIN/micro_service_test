@@ -1,4 +1,4 @@
-module LaunchService/LaunchStock/server
+module launchservice/launchstock/server
 
 go 1.18
 

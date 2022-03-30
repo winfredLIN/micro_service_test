@@ -7,20 +7,20 @@ import (
 	"net"
 	"os"
 	"os/signal"
-	"services/stockService"
+	"service/stockservice"
 	"syscall"
 
 	"google.golang.org/grpc"
 )
 
-var config = stockService.Config{
+var config = stockservice.Config{
 	Host: cfg.GetConfig().Server.Host,
 	Port: ":" + cfg.GetConfig().Server.Port,
 }
 
 func LaunchStockServer() {
 	// 建立服务并且注册
-	StockServer := stockService.NewStockServer()
+	StockServer := stockservice.NewStockServer()
 
 	grpcServer := grpc.NewServer()
 	// 注册需要注册gRPC的服务以及在protoc定义的服务

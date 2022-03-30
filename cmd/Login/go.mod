@@ -1,4 +1,4 @@
-module cmd/Login
+module cmd/login
 
 go 1.18
 

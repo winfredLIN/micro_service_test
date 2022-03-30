@@ -4,7 +4,7 @@ import (
 	pb "api/protobuf/payment"
 	"context"
 	"log"
-	payment "services/paymentService"
+	payment "service/paymentservice"
 )
 
 func LaunchPayClient(Userid uint32, totalPrice float32) (AccountBalance float32, success bool) {

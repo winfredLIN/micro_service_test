@@ -1,4 +1,4 @@
-module LaunchService/LaunchUser/server
+module launchservice/launchuser/server
 
 go 1.18
 

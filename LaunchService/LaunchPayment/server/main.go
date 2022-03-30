@@ -7,20 +7,20 @@ import (
 	"net"
 	"os"
 	"os/signal"
-	"services/paymentService"
+	"service/paymentservice"
 	"syscall"
 
 	"google.golang.org/grpc"
 )
 
-var config = paymentService.Config{
+var config = paymentservice.Config{
 	Host: cfg.GetConfig().Server.Host,
 	Port: ":" + cfg.GetConfig().Server.Port,
 }
 
 func LaunchPayServer() {
 	// 建立服务并且注册
-	PayServer := paymentService.NewPayServer()
+	PayServer := paymentservice.NewPayServer()
 
 	grpcServer := grpc.NewServer()
 	// 注册需要注册gRPC的服务以及在protoc定义的服务

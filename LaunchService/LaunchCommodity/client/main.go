@@ -4,7 +4,7 @@ import (
 	pb "api/protobuf/commodity"
 	"context"
 	"log"
-	commodity "services/commodityService"
+	commodity "service/commodityservice"
 )
 
 func LaunchCommodityAddClient(Id uint32, Name string, Price float32, Discription string) (id uint32) {

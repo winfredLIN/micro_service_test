@@ -7,20 +7,20 @@ import (
 	"net"
 	"os"
 	"os/signal"
-	"services/userService"
+	"service/userservice"
 	"syscall"
 
 	"google.golang.org/grpc"
 )
 
-var config = userService.Config{
+var config = userservice.Config{
 	Host: cfg.GetConfig().Server.Host,
 	Port: ":" + cfg.GetConfig().Server.Port,
 }
 
 func LaunchLoginServer() {
 	// 建立服务并且注册
-	LoginServer := userService.NewLoginServer()
+	LoginServer := userservice.NewLoginServer()
 
 	grpcServer := grpc.NewServer()
 	// 注册需要注册gRPC的服务以及在protoc定义的服务
@@ -48,7 +48,7 @@ func LaunchLoginServer() {
 
 func LaunchRegistrationServer() {
 	// 建立服务并且注册
-	RegistrationServer := userService.NewRegistrationServer()
+	RegistrationServer := userservice.NewRegistrationServer()
 
 	grpcServer := grpc.NewServer()
 	// 注册需要注册gRPC的服务以及在protoc定义的服务

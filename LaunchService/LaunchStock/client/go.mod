@@ -1,3 +1,3 @@
-module LaunchService/LaunchStock/client
+module launchservice/launchstock/client
 
 go 1.18

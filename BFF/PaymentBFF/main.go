@@ -1,9 +1,9 @@
 package paymentbff
 
 import (
-	payment "LaunchService/LaunchPayment/client"
-	stock "LaunchService/LaunchStock/client"
-	user "LaunchService/LaunchUser/client"
+	payment "launchservice/launchpayment/client"
+	stock "launchservice/launchstock/client"
+	user "launchservice/launchuser/client"
 	"fmt"
 )
 

@@ -4,7 +4,7 @@ import (
 	pb "api/protobuf/stock"
 	"context"
 	"log"
-	stock "services/stockService"
+	stock "service/stockservice"
 )
 
 // 暂时只允许更改数量和价格
